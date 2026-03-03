@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adedamola Aregbesola Seun - Content Writer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafafa;
+            transition: all 0.5s ease;
+        }
+
+        header {
+            background: linear-gradient(135deg, #374151 0%, #9ca3af 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            transition: background 0.5s ease;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        nav {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #9ca3af;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #374151;
+            transition: color 0.5s ease;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #374151 0%, #9ca3af 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: white;
+            opacity: 0.8;
+            transition: background 0.5s ease;
+        }
+
+        .portfolio-content {
+            padding: 25px;
+        }
+
+        .portfolio-content h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .portfolio-content .category {
+            color: #374151;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            transition: color 0.5s ease;
+        }
+
+        .portfolio-content p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            color: #374151;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 16px;
+            border: 2px solid #374151;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .read-more:hover {
+            background: #374151;
+            color: white;
+        }
+
+        .about-section {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-section p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .contact-section {
+            text-align: center;
+            background: linear-gradient(135deg, #374151 0%, #9ca3af 100%);
+            color: white;
+            padding: 80px 20px;
+            margin-top: 60px;
+            transition: background 0.5s ease;
+        }
+
+        .contact-section h2 {
+            color: white;
+        }
+
+        .contact-section p {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+
+        .contact-section a {
+            color: white;
+            text-decoration: none;
+            border: 2px solid white;
+            padding: 15px 40px;
+            display: inline-block;
+            margin-top: 20px;
+            border-radius: 50px;
+            transition: background 0.3s, color 0.3s;
+            font-weight: 600;
+        }
+
+        .contact-section a:hover {
+            background: white;
+            color: #374151;
+            transition: all 0.3s ease;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 20px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+        }
+
+        .modal-content h1 {
+            color: #374151;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .modal-content h2 {
+            color: #374151;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            text-align: left;
+        }
+
+        .modal-content p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .modal-content ul {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .modal-content li {
+            margin-bottom: 10px;
+        }
+
+        .article-excerpt {
+            display: block;
+        }
+
+        .article-full {
+            display: none;
+        }
+
+        .read-all-btn {
+            background: #374151;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 30px auto;
+            display: block;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .read-all-btn:hover {
+            background: #4b5563;
+            transform: scale(1.05);
+        }
+
+        .fade-out {
+            position: relative;
+        }
+
+        .fade-out::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, #fefefe);
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <h1>Adedamola Aregbesola Seun</h1>
+        <p>Content Writer | Research Specialist | SEO Expert</p>
+    </header>
+
+    <nav>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="container" id="portfolio">
+        <h2>My Portfolio</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item" onclick="openModal('article1')">
+                <div class="portfolio-image">₿</div>
+                <div class="portfolio-content">
+                    <div class="category">Cryptocurrency Writing</div>
+                    <h3>Bitcoin & Altcoin Analysis</h3>
+                    <p>In-depth coverage of Bitcoin reaching $100K milestone and emerging altcoins like DTX Exchange, analyzing market trends, whale movements, and investment opportunities in the crypto space.</p>
+                    <span class="read-more">Read Full Article →</span>
+                </div>
+            </div>
+
+            <div class="portfolio-item" onclick="openModal('article2')">
+                <div class="portfolio-image">📊</div>
+                <div class="portfolio-content">
+                    <div class="category">Crypto Market Analysis</div>
+                    <h3>Trump Election Impact on Crypto</h3>
+                    <p>Analyzed the impact of Trump's presidential victory on cryptocurrency markets, covering explosive gains potential for Solana (SOL), Shiba Inu (SHIB), and DTX Exchange with expert insights and predictions.</p>
+                    <span class="read-more">Read Full Article →</span>
+                </div>
+            </div>
+
+            <div class="portfolio-item" onclick="openModal('article3')">
+                <div class="portfolio-image">🚀</div>
+                <div class="portfolio-content">
+                    <div class="category">DeFi & Blockchain</div>
+                    <h3>AI-Powered Trading Platforms</h3>
+                    <p>Covered IntelMarkets (INTL) and its integration of AI into DeFi trading, explaining complex blockchain technology, zkSync explosions, and exchange-based tokens for mainstream audiences.</p>
+                    <span class="read-more">Read Full Article →</span>
+                </div>
+            </div>
+
+            <div class="portfolio-item" onclick="openModal('article4')">
+                <div class="portfolio-image">📈</div>
+                <div class="portfolio-content">
+                    <div class="category">Digital Marketing</div>
+                    <h3>Customer Web Analytics Strategy</h3>
+                    <p>Comprehensive guide on 10 trends in customer web analytics, covering actionable insights, data democratization, cloud migration, and testing strategies for business growth.</p>
+                    <span class="read-more">Read Full Article →</span>
+                </div>
+            </div>
+
+            <div class="portfolio-item" onclick="openModal('article5')">
+                <div class="portfolio-image">📧</div>
+                <div class="portfolio-content">
+                    <div class="category">Marketing Research</div>
+                    <h3>Email Marketing Statistics 2022</h3>
+                    <p>Data-driven analysis of email marketing effectiveness, covering B2B and B2C statistics, automation trends, and revenue generation insights with comprehensive industry research.</p>
+                    <span class="read-more">Read Full Article →</span>
+                </div>
+            </div>
+
+            <div class="portfolio-item" onclick="openModal('article6')">
+                <div class="portfolio-image">📱</div>
+                <div class="portfolio-content">
+                    <div class="category">Social Media Marketing</div>
+                    <h3>Social Media Marketing Guide</h3>
+                    <p>Beginner-friendly guide to powerful social media marketing strategies, covering audience identification, platform selection, organic vs paid growth, and community building.</p>
+                    <span class="read-more">Read Full Article →</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="about">
+        <h2>About Me</h2>
+        <div class="about-section">
+            <p>Hello! I'm Adedamola Aregbesola Seun, an enthusiastic and creative content writer dedicated to producing compelling, quality content for brands and businesses. With over 6 years of combined experience in academic research and freelance content writing, I specialize in improving sales, creating engagement, driving conversion, and boosting ranking through strategic content.</p>
+            <p>My journey began as a Researcher and Academic Writer from 2018 to 2022, where I designed surveys, conducted extensive research, and authored academic reports that resulted in a 500% annual increase in published journals. This experience, combined with my Bachelor's degree in Philosophy and Sociology from Obafemi Awolowo University, equipped me with exceptional research knowledge and critical thinking skills.</p>
+            <p>Since 2021, I've been working as a Freelance Content Writer, creating SEO-optimized content across various niches including Digital Marketing, E-commerce, SaaS, and cryptocurrency. I'm versatile in producing blog posts, website content, case studies, how-to guides, and long-form content that helps clients meet their targets and KPIs. I pride myself on delivering error-free, engaging content under tight deadlines while maintaining exceptional attention to detail.</p>
+            <p>My expertise includes SEO writing and optimization, content marketing strategy, editing and proofreading, and working with tools like Google Docs, Grammarly, and Microsoft 365. I'm certified in Marketing Strategy: SEO Content Writing and Writing Email People Want to Read from LinkedIn Learning.</p>
+        </div>
+    </div>
+
+    <div class="contact-section" id="contact">
+        <h2>Let's Work Together</h2>
+        <p>Abuja, Nigeria | Available for projects worldwide</p>
+        <p>Have a project in mind? I'd love to hear from you!</p>
+        <a href="mailto:aregbesolaadedamola@gmail.com">Get In Touch</a>
+        <p style="margin-top: 20px; font-size: 0.9em;">📞 +234 813-108-8279</p>
+        <p style="font-size: 0.9em; margin-top: 10px;">
+            <a href="http://linkedin.com/in/adedamola-aregbesola-47a8a0182" target="_blank" style="color: white; text-decoration: underline;">Connect on LinkedIn</a> | 
+            <a href="https://x.com/og_my_man" target="_blank" style="color: white; text-decoration: underline;">Follow me on X (Twitter)</a> | 
+            <a href="https://www.sil.org/resources/publications/search/series/journal-language-survey-reports/contributor/aregbesola-adedamola" target="_blank" style="color: white; text-decoration: underline;">View Academic Publications</a>
+        </p>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Adedamola Aregbesola Seun. All rights reserved.</p>
+    </footer>
+
+    <!-- Modal for Article 1 -->
+    <div id="article1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('article1')">&times;</span>
+            <h1>Bitwise CIO: BTC Going Above $100K – DTX Exchange (DTX) Might Hit $1 Ahead of Dogecoin (DOGE) and TRON (TRX), Experts Weigh in</h1>
+            
+            <!-- Excerpt View -->
+            <div class="article-excerpt fade-out">
+                <p>In a recent interview with Yahoo Finance on Bitcoin's future, Bitwise Asset Management CIO Matt Hougan said, "I think we're going above $100,000 on Bitcoin." He cited several catalysts, notably the upcoming US election. In his words, "I think the most important thing for Bitcoin is that the election happens," regardless of the outcome.</p>
+                
+                <p>Meanwhile, a surprising contender has entered the race to $1: DTX Exchange (DTX). This new altcoin stands at the crossroads between TradFi and DeFi, ridiculously undervalued at the current ICO price of $0.08. Tipped to hit $1 ahead of Dogecoin (DOGE) and TRON (TRX), experts believe this is a new DeFi project worth betting on.</p>
+                
+                <h2>DTX Exchange (DTX): Primed to Hit $1 Ahead of Popular Names</h2>
+                
+                <p>DTX Exchange (DTX) is a new altcoin stirring much buzz thanks to its solid fundamentals and tangible applications. The presale continues to sell out fast—a whopping $6.3 million has been raised in early funding...</p>
+            </div>
+            
+            <button class="read-all-btn" onclick="toggleArticle('article1')">Read Full Article</button>
+            
+            <!-- Full Article View -->
+            <div class="article-full">
+                <p>In a recent interview with Yahoo Finance on Bitcoin's future, Bitwise Asset Management CIO Matt Hougan said, "I think we're going above $100,000 on Bitcoin." He cited several catalysts, notably the upcoming US election. In his words, "I think the most important thing for Bitcoin is that the election happens," regardless of the outcome.</p>
+                
+                <p>Meanwhile, a surprising contender has entered the race to $1: DTX Exchange (DTX). This new altcoin stands at the crossroads between TradFi and DeFi, ridiculously undervalued at the current ICO price of $0.08. Tipped to hit $1 ahead of Dogecoin (DOGE) and TRON (TRX), experts believe this is a new DeFi project worth betting on.</p>
+                
+                <h2>DTX Exchange (DTX): Primed to Hit $1 Ahead of Popular Names</h2>
+                
+                <p>DTX Exchange (DTX) is a new altcoin stirring much buzz thanks to its solid fundamentals and tangible applications. The presale continues to sell out fast—a whopping $6.3 million has been raised in early funding. This massive turnout is a vote of confidence in its potential and appeal.</p>
+                
+                <p>Its unique offering will be a hybrid trading platform that features the best elements of CEX and DEX, notably non-custodial storage solutions, an on-chain order book and wallet-based trading. Utility-backed, the DTX token will be used to invest in thousands of asset classes, including stocks, forex, commodities, cryptocurrencies and tokenized financial instruments.</p>
+                
+                <p>Equally important, token holders will have governance rights via staking. Meanwhile, the ongoing presale presents an opportunity to invest in the future of the $3.2 billion global trading market. In round 4, a token costs $0.08 and is tipped to hit $1 before the year's end, potentially edging out Dogecoin (DOGE) and TRON (TRX).</p>
+                
+                <h2>Dogecoin (DOGE): Is $1 Feasible?</h2>
+                
+                <p>Dogecoin (DOGE) is a top altcoin and the leading meme. It introduced the meme narrative after its launch in 2013, although it rose to popularity in 2021. Since then, it has climbed the crypto ladder and is currently a top 10 cryptocurrency.</p>
+                
+                <p>The recent market uptick pushed Dogecoin (DOGE) to the upside. The Dogecoin price exploded over 20% on the weekly chart, rising from a low of $0.13 to $0.17. This continues its 45% uptick in the past 30 days, gathering steam for a breakout above its March high of $0.22, with the daily Simple Moving Average (50) at 0.12120—a buy signal.</p>
+                
+                <p>However, a nagging question within the Dogecoin community is: "Can it hit $1?" Its last all-time high was seven years ago during the 2021 bull market, when it hit $0.73. A bearish Dogecoin price prediction believes it has topped, casting doubt on its potential to hit this elusive mark.</p>
+                
+                <h2>TRON (TRX): Hitting $1 Might be Next to Impossible</h2>
+                
+                <p>TRON (TRX), one of the top crypto coins, is popular for its DeFi solutions and services. It facilitates the creation of decentralized applications (dApps) and hosts other blockchain-based projects—a favorite thanks to its cheap transaction fees and fast speed.</p>
+                
+                <p>Defying expectations, TRON (TRX) maintains bullish traction. It surpassed its August high of $0.167 this week, highlighting growing interest. The TRON price gained 4% in the past 7 days, changing hands around $0.169, with MACD Level (12, 26) on TradingView daily chart reading 0.0030, a buy signal.</p>
+                
+                <p>With sights set on flipping its 2018 all-time high of $0.3, TRON is among the altcoins to watch. It is on track to hit a new peak before the year's end, positioning it among the best coins to invest in. However, reaching the $1 might likely not play out this year, assuming it will, which top experts believe is almost impossible.</p>
+                
+                <h2>Conclusion</h2>
+                
+                <p>With Bitcoin primed to hit $100,000, reiterated by the comment of Bitwise CEO, an altseason is inevitable. As the race to $1 heats up, DTX Exchange (DTX) has emerged as a new contender, backed by retailers and whales. Its hybrid approach to trading and rapidly growing community make it a better bet than Dogecoin (DOGE) and TRON (TRX).</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Article 2 -->
+    <div id="article2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('article2')">&times;</span>
+            <h1>Trump's Election Victory Ushers in Fresh Optimism – 3 Altcoins Poised for Explosive Gains: Solana (SOL), Shiba Inu (SHIB) and DTX Exchange (DTX)</h1>
+            
+            <!-- Excerpt View -->
+            <div class="article-excerpt fade-out">
+                <p>Donald Trump was elected US president over Kamala Harris, ushering in fresh optimism and hopes of a bull run. With prices already parabolic, a full-blown bull market is on the horizon. The three altcoins to watch for explosive gains are Solana (SOL), Shiba Inu (SHIB) and DTX Exchange (DTX).</p>
+                
+                <p>These cryptocurrencies stand out for several reasons, from their unique offerings to staggering upside potential. SOL, the hottest Layer-1 token and SHIB, the leading ETH memecoin, are primed for massive gains. Meanwhile, DTX, a new altcoin at the crossroads between TradFi and DeFi, is poised to skyrocket after its debut.</p>
+                
+                <h2>DTX Exchange (DTX): A New DeFi Project to Watch for 40x Rally</h2>
+                
+                <p>DTX Exchange (DTX) is among the latest sensations on the investment block. It hit the $7 million fundraising goal amid rising whale and retail interest...</p>
+            </div>
+            
+            <button class="read-all-btn" onclick="toggleArticle('article2')">Read Full Article</button>
+            
+            <!-- Full Article View -->
+            <div class="article-full">
+                <p>Donald Trump was elected US president over Kamala Harris, ushering in fresh optimism and hopes of a bull run. With prices already parabolic, a full-blown bull market is on the horizon. The three altcoins to watch for explosive gains are Solana (SOL), Shiba Inu (SHIB) and DTX Exchange (DTX).</p>
+                
+                <p>These cryptocurrencies stand out for several reasons, from their unique offerings to staggering upside potential. SOL, the hottest Layer-1 token and SHIB, the leading ETH memecoin, are primed for massive gains. Meanwhile, DTX, a new altcoin at the crossroads between TradFi and DeFi, is poised to skyrocket after its debut.</p>
+                
+                <h2>DTX Exchange (DTX): A New DeFi Project to Watch for 40x Rally</h2>
+                
+                <p>DTX Exchange (DTX) is among the latest sensations on the investment block. It hit the $7 million fundraising goal amid rising whale and retail interest, highlighting its rapidly growing community. Behind this massive presale turnout are its significant upside potential and solid fundamentals.</p>
+                
+                <p>Unlike conventional trading platforms, it will represent the best of CEX and DEX exchanges, aiming to reshape the $10 billion global trading space. Given the several challenges in the trading scene, notably financial exclusion and global inaccessibility to assets and markets, its approach has been hailed as groundbreaking. Key aspects of the protocol will include smart contracts, an on-chain order book, distributed liquidity pools and a hybrid model.</p>
+                
+                <p>Meanwhile, a token is heavily discounted at $0.08 in round 4 of the ICO. Considering it will be debuting during favorable market conditions, it is on track for a 40x rally. Given the plenty of room for growth as a new ICO, it is one of the best cryptos to invest in, alongside Solana (SOL) and Shiba Inu (SHIB).</p>
+                
+                <h2>Solana (SOL): $300 Soon?</h2>
+                
+                <p>Solana (SOL), a top-4 cryptocurrency after flipping BNB in market size, is one of the week's biggest highlights. Its ecosystem of dApps is also growing rapidly, largely driven by the soaring interest in and buzz around memecoins.</p>
+                
+                <p>It had its best performance since the March rush, retesting $200 this week. The Solana price exploded by over 15% on the weekly charts, racing towards a new peak. Its last all-time high was in 2021 after hitting $260.</p>
+                
+                <p>According to a crypto analyst, Solana (SOL) breaking out from a 7-month-long consolidation might push the price to $300. Trump's election victory might also be a bullish catalyst. Moreover, TradingView's Volume Weighted Moving Average (20) at 174.58 and the Hull Moving Average (9) at 195.50 hint at further gains—a good crypto to buy.</p>
+                
+                <h2>Shiba Inu (SHIB): The Leading Ethereum Memecoin</h2>
+                
+                <p>Shiba Inu (SHIB), the second-largest memecoin, is among the best altcoins. It leads the memecoin movement on the Ethereum blockchain, contributing to its attraction. Its robust ecosystem and vibrant community also paint a bullish picture.</p>
+                
+                <p>Mirroring bullish sentiments in the broader crypto market, the Shiba Inu price soared over 7% on the weekly charts. It changes hands around $0.000018, with a zero likely to be canceled in the coming days. Moreover, an analyst predicts $0.00081 as the next target—over a 300% increase.</p>
+                
+                <p>Meanwhile, TradingView's Awesome Oscillator is at 0.00000035, a bullish signal, the same as the moving averages, which tilt toward a "strong buy." With the coming weeks tipped to be explosive, Shiba Inu (SHIB) is one of the altcoins to watch.</p>
+                
+                <h2>Conclusion</h2>
+                
+                <p>Trump's election victory was met with much excitement, considering his pro-crypto stance. With a massive bull run brewing, the three altcoins to bet on are Shiba Inu (SHIB), Solana (SOL) and DTX Exchange (DTX). DTX, a new hybrid trading platform and an altcoin at the intersection of TradFi and DeFi, is one not to miss.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Article 3 -->
+    <div id="article3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('article3')">&times;</span>
+            <h1>Todd Denies Being Satoshi But Should You Be Worried When Whales Are Stacking Up This AI Coin at $0.027? The Next Solana and BNB?</h1>
+            
+            <!-- Excerpt View -->
+            <div class="article-excerpt fade-out">
+                <p>The latest HBO documentary sparked a lot of buzz after suggesting Bitcoin developer Peter Todd might be Satoshi Nakamoto. This marked another attempt at revealing the mysterious identity of the Bitcoin creator, which Todd termed "grasping at straws," saying "I am not Satoshi."</p>
+                
+                <p>Amidst this, market activity is in full swing, with whales stacking up the viral AI crypto IntelMarkets (INTL). With over $1 million raised in record time, its low price of $0.027 presents a good entry to explosive gains, hailed as the next Solana (SOL) and Binance Coin (BNB).</p>
+                
+                <h2>IntelMarkets (INTL): The Next Big Thing?</h2>
+                
+                <p>While the decade-long attempt at unraveling the identity of Satoshi Nakamoto, Bitcoin's creator, continues, whales have been stockpiling IntelMarkets (INTL)...</p>
+            </div>
+            
+            <button class="read-all-btn" onclick="toggleArticle('article3')">Read Full Article</button>
+            
+            <!-- Full Article View -->
+            <div class="article-full">
+                <p>The latest HBO documentary sparked a lot of buzz after suggesting Bitcoin developer Peter Todd might be Satoshi Nakamoto. This marked another attempt at revealing the mysterious identity of the Bitcoin creator, which Todd termed "grasping at straws," saying "I am not Satoshi."</p>
+                
+                <p>Amidst this, market activity is in full swing, with whales stacking up the viral AI crypto IntelMarkets (INTL). With over $1 million raised in record time, its low price of $0.027 presents a good entry to explosive gains, hailed as the next Solana (SOL) and Binance Coin (BNB).</p>
+                
+                <h2>IntelMarkets (INTL): The Next Big Thing?</h2>
+                
+                <p>While the decade-long attempt at unraveling the identity of Satoshi Nakamoto, Bitcoin's creator, continues, whales have been stockpiling IntelMarkets (INTL). This new AI-DeFi coin is the latest on investor radar thanks to its novelty and upside potential.</p>
+                
+                <p>Following massive demand, the presale hit the $1 million fundraising milestone. Dare we say it was in record time too? It outpaced most new ICOs, hailed as this quarter's best presale. Meanwhile, a token costs only $0.027 in the third stage and is tipped by experts for a 65x rally post-launch. Is it the next Solana (SOL) or Binance Coin (BNB)?</p>
+                
+                <p>Also fueling interest is its integration of AI into DeFi trading, aiming to transform the $264 billion crypto trading market. It will be the first trading protocol to incorporate artificial intelligence across all levels—the first true-generation modern exchange platform. It further stands out with its self-learning trading robots and a dual-chain platform that will support and can run on the Ethereum and Solana blockchains.</p>
+                
+                <h2>Solana (SOL): Primed for a Jump Above $250</h2>
+                
+                <p>Solana (SOL), the DeFi giant and the new memecoin hub, is one of the top altcoins. Its Layer-1 blockchain platform helps with creating cutting-edge decentralized applications, or dApps, as they are popularly called in the crypto space.</p>
+                
+                <p>Some competitive advantages of the Solana blockchain are its low transaction costs and lightning speed. Equally important is its rapidly growing meme ecosystem, which was behind its last big jump. During the March run, the Solana price hit $200, registering its annual peak.</p>
+                
+                <p>However, there has been a significant drop in value since then. A 2% decline in the past seven days pushed it toward the $140 support. But with the crypto market tilting towards a bounce, SOL is primed for a comeback. A Solana price prediction suggests a climb above $250 in the coming weeks, making it one of the altcoins to keep on the radar.</p>
+                
+                <h2>Binance Coin (BNB): $1,000 Before the Year's End?</h2>
+                
+                <p>Binance Coin (BNB) is one of the leading cryptocurrencies, behind only Ethereum on the altcoin list. As the leading exchange-based token, it plays a vital role in the crypto space. It powers the BNB Smart Chain, facilitating exclusive token sales and payments.</p>
+                
+                <p>As a top-5 cryptocurrency, the leading status of Binance Coin (BNB) isn't up for debate. It exerted its dominance in early June, registering an all-time high of $720. However, there has been a 20% downturn since this remarkable run.</p>
+                
+                <p>The BNB price is currently on the upside; the token exchanges hands at $560. With plenty of room for growth, a BNB price prediction suggests a complete reversal, tipping it for a jump above $1,000 before the year's end.</p>
+                
+                <h2>Conclusion</h2>
+                
+                <p>While Peter Todd denies being Satoshi Nakamoto, whales have been accumulating IntelMarkets (INTL), pushing it above $1 million in funding. Its 65x growth prospects after its launch and novelty—an AI-powered trading platform—set the stage for massive adoption. Hailed as the next Solana (SOL) and Binance Coin (BNB), it is a new DeFi project worth betting on.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Article 4 -->
+    <div id="article4" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('article4')">&times;</span>
+            <h1>10 Trends in Customer Web Analytics: Developing a Strategy</h1>
+            
+            <!-- Excerpt View -->
+            <div class="article-excerpt fade-out">
+                <p>The current global population and interconnectedness have generated a large amount of data, which requires analytics. To run a successful business, it is necessary to make sense of the data provided by customers and market competitors.</p>
+                
+                <p>In today's competitive market, data and analytics provide a competitive advantage to businesses. This includes improving their ability to make fact-based decisions and develop data-driven products and services. As a result, analytics, data collection and analysis, is critical and should be at the heart of every business.</p>
+                
+                <p>Today, companies are gravitating toward data analytics, or web analytics, a variant of it, in order to make sense of and leverage data. Consequently, data analytics has become the foundation of every new and established business...</p>
+            </div>
+            
+            <button class="read-all-btn" onclick="toggleArticle('article4')">Read Full Article</button>
+            
+            <!-- Full Article View -->
+            <div class="article-full">
+                <p>The current global population and interconnectedness have generated a large amount of data, which requires analytics. To run a successful business, it is necessary to make sense of the data provided by customers and market competitors.</p>
+                
+                <p>In today's competitive market, data and analytics provide a competitive advantage to businesses. This includes improving their ability to make fact-based decisions and develop data-driven products and services. As a result, analytics, data collection and analysis, is critical and should be at the heart of every business.</p>
+                
+                <p>Today, companies are gravitating toward data analytics, or web analytics, a variant of it, in order to make sense of and leverage data. Consequently, data analytics has become the foundation of every new and established business. The extraction and categorization of web data in order to interpret patterns, trends, and optimize web usage is known as web analytics.</p>
+                
+                <h2>1. Creating Actionable Insights</h2>
+                
+                <p>It isn't enough to simply have insights from data; businesses must also act on them, because insights are meaningless without actions. This is one of the major analytics trends of 2022, with its emphasis on acting on actionable insights garnered from data.</p>
+                
+                <p>Data analytics has traditionally been read-only. Insights are created, but their application is left to the organizations or businesses. However, this is changing, with technological innovations like artificial intelligence and machine learning allowing businesses to take action with business intelligence tools.</p>
+
+                <h2>2. Using External Data</h2>
+                
+                <p>The quantity and quality of data are both important. The more analytics data used by businesses to make actionable insights, the better. This has prompted businesses, including those that had previously relied on their own data, to supplement their data sets with external data.</p>
+
+                <h2>3. Combine Data for Efficient Operations</h2>
+                
+                <p>The value of using external data in addition to internal data to generate actionable insights cannot be overstated. This has prompted companies to gather data from different areas, platforms, and channels. However, while this is important, the data needs to be standardized and centralized.</p>
+
+                <h2>4. Consumer-personalized Data</h2>
+                
+                <p>It is important to have actionable insights that reflect customer behavior and are able to adapt to customers' and market dynamics. The understanding of customers' behaviors, needs, and preferences through data analytics enables businesses to create approaches that will effectively meet their target market.</p>
+
+                <h2>5. Using Gathered Data Responsibly</h2>
+                
+                <p>Before personal data can be collected, customers' trust must be gained. And once trust is established, it should not be abused. This brings us to an important rule: data privacy. The increasing abuse of data and scandals have made the public wary about sharing personal data with the public.</p>
+
+                <h2>6. Data Cloud Migration</h2>
+                
+                <p>One of the prevalent data analytics trends today is the migration of data from on-site to the cloud. The benefits attached to data cloud migration are significant. As a result, businesses are moving their data and analytics from in-house to the cloud.</p>
+
+                <h2>7. Context-enriched Analytics</h2>
+                
+                <p>It is estimated that by 2025, context-driven data analytics, alongside artificial intelligence, will replace more than half of traditional data models. Context-enriched analytics is built on graph technology, helping businesses to have deep data analytics.</p>
+
+                <h2>8. Democratization of Data</h2>
+                
+                <p>The need and benefits of data analytics are now being seen in the operation of businesses. Today, companies are democratizing and creating data-driven environments that will enable their employees with no core data background to become data analysts.</p>
+
+                <h2>9. Testing Strategies</h2>
+                
+                <p>With the ability of customers to be targeted across different platforms, businesses must be willing to test strategies created from actionable insights before their full launch. This approach allows businesses to analyze content and strategies from different channels.</p>
+
+                <h2>10. Businesses Need to Know Their Target Customers</h2>
+                
+                <p>Different models are needed to understand customers and properly empathize with them. To provide a great customer experience, businesses need to understand and empathize with their customers by studying their behaviors, needs, preferences, and motivations.</p>
+
+                <h2>Final Words</h2>
+                
+                <p>Data analytics is no longer an afterthought in today's highly competitive market, but an intentional and necessary activity needed to make actionable insights. The highlighted trends in customer web analytics are essential for running a successful business and improving customers' experience.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Article 5 -->
+    <div id="article5" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('article5')">&times;</span>
+            <h1>Email Marketing Statistics 2022</h1>
+            
+            <!-- Excerpt View -->
+            <div class="article-excerpt fade-out">
+                <p>The first ever email was sent in 1971, meaning it has been around for five decades. It begs the question of its relevance today, especially in light of the prevalence of social media and other marketing platforms.</p>
+                
+                <p>While it is human nature to get caught up in the excitement of new inventions while forgetting about the old, this is not the case with email marketing. It has endured as a highly effective marketing tool.</p>
+                
+                <h2>What is Email Marketing</h2>
+                
+                <p>Email marketing is a marketing strategy that aims to raise brand or business awareness or boost sales by communicating with people via email...</p>
+            </div>
+            
+            <button class="read-all-btn" onclick="toggleArticle('article5')">Read Full Article</button>
+            
+            <!-- Full Article View -->
+            <div class="article-full">
+                <p>The first ever email was sent in 1971, meaning it has been around for five decades. It begs the question of its relevance today, especially in light of the prevalence of social media and other marketing platforms.</p>
+                
+                <p>While it is human nature to get caught up in the excitement of new inventions while forgetting about the old, this is not the case with email marketing. It has endured as a highly effective marketing tool.</p>
+                
+                <h2>What is Email Marketing</h2>
+                
+                <p>Email marketing is a marketing strategy that aims to raise brand or business awareness or boost sales by communicating with people via email. The marketing tool is used to promote businesses' products or services. In addition, it can also be used as a means of keeping in touch with target customers.</p>
+                
+                <p>This marketing strategy is cost-effective and has a high conversion rate. These email marketing statistics will show how invaluable this marketing tool is.</p>
+                
+                <h2>Email Marketing Statistics (General)</h2>
+                
+                <p>According to Statista (2022), the number of email users in the world is estimated to reach 4,258 million in 2022. In addition, the estimated number of emails sent and received is expected to reach 333.2 billion in 2022. With its wide reach and users, email marketing remains a strong force in marketing today.</p>
+                
+                <p>The importance of email marketing today cannot be overemphasized. Campaign Monitor reported that email marketing is used by 64% of small-scale businesses to reach their customers. Furthermore, Litmus found that 41.5% of brands saw email marketing as critical to their success.</p>
+                
+                <p>According to OptinMonster, 99% of users with email accounts open their emails every day. In addition, 37% of businesses are willing to improve their email marketing budget to reach this high audience in 2022.</p>
+                
+                <p>According to Databox (2022), 33% of marketers send emails once a week, while 26% send them several times per month. Revenue generated from email marketing is projected to reach $9.62 billion by 2022.</p>
+                
+                <h2>Business-to-Consumer (B2C) Email Marketing Statistics</h2>
+                
+                <p>Business-to-consumer email is a direct interaction between businesses and their end users, the customers. According to SaleCycle, 59% of customers believed marketing emails to be instrumental in their decision to purchase from a brand. Furthermore, 61% of customers favor email as the means of communication from businesses.</p>
+                
+                <p>Email newsletters are believed to be the most effective marketing channel to nurture leads. According to the Content Marketing Institute, 16% of B2C marketers agreed with this.</p>
+                
+                <h2>Business-to-Business (B2B) Email Marketing Statistics</h2>
+                
+                <p>Email marketing isn't limited to interaction between businesses and their customers alone, but also between one business and another. According to WordStream (2022), 59% of B2B marketers perceive email marketing as the best means to generate revenue. In addition, 77% of B2B marketers make use of this marketing strategy to improve sales and traffic to their website.</p>
+                
+                <p>According to the Content Marketing Institute, email engagement is the top metric used by B2B marketers to measure campaign performance. Email newsletters are considered by 31% of B2B marketers as the best way to create market leads.</p>
+                
+                <h2>Automation Email Marketing Statistics</h2>
+                
+                <p>Email automation is used in email marketing to nurture leads, for conversion, and to retain customers. According to Emailmonday (2022), 51% of companies currently make use of email automation. Email automation generates 320% more revenue than non-automated campaigns.</p>
+                
+                <p>According to Content Marketing (2020), 85% of marketers make use of automated campaigns. The three major benefits of email automation are: 30% saving of time, 22% lead generation, and 17% increase in revenue.</p>
+                
+                <h2>Final Words</h2>
+                
+                <p>Email marketing is one of the oldest marketing tools, yet remains one of the most effective today. The statistics behind email marketing show that it is still widely adopted by brands and businesses. The wide reach of email today means companies are willing to improve their budget to fully optimize it.</p>
+                
+                <p>The high rate at which people open their email and their preference for it as a means for interaction shows why businesses will keep using it as a marketing tool. If you haven't thought about creating awareness for your brand or increasing sales with email marketing, now is the time.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Article 6 -->
+    <div id="article6" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('article6')">&times;</span>
+            <h1>Powerful Social Media Marketing for Beginners</h1>
+            
+            <!-- Excerpt View -->
+            <div class="article-excerpt fade-out">
+                <p>Social media has been around for years, used by billions of people in their everyday lives to reach and connect with friends, families and colleagues. It started off as a way to connect with people, but currently connects brands and businesses to far and wide audiences. The traditional face-to-face or posters marketing is fast giving way for this wide-reach marketing tool, making it the best marketing tool.</p>
+                
+                <p>This article is for beginners in social media marketing. You are off to a great start with these powerful tips and guides.</p>
+                
+                <h2>What is Social Media Marketing</h2>
+                
+                <p>Social media marketing provides one of the most important aspects of a business—marketing, but on a larger and wider scale...</p>
+            </div>
+            
+            <button class="read-all-btn" onclick="toggleArticle('article6')">Read Full Article</button>
+            
+            <!-- Full Article View -->
+            <div class="article-full">
+                <p>Social media has been around for years, used by billions of people in their everyday lives to reach and connect with friends, families and colleagues. It started off as a way to connect with people, but currently connects brands and businesses to far and wide audiences. The traditional face-to-face or posters marketing is fast giving way for this wide-reach marketing tool, making it the best marketing tool.</p>
+                
+                <p>This article is for beginners in social media marketing. You are off to a great start with these powerful tips and guides.</p>
+                
+                <h2>What is Social Media Marketing</h2>
+                
+                <p>Social media marketing provides one of the most important aspects of a business—marketing, but on a larger and wider scale. The social media platforms for marketing include: Twitter, Instagram, Facebook, TikTok, LinkedIn, etc.</p>
+                
+                <h2>Benefits of Using Social Media as a Marketing Tool</h2>
+                
+                <p>The benefits of social media marketing today cannot be overemphasized, with large corporations and small-scale businesses alike leveraging its powerful reach.</p>
+                
+                <p>Some of the core benefits of social media marketing include:</p>
+                <ul>
+                    <li>Awareness creation</li>
+                    <li>Increased sales</li>
+                    <li>Income generative</li>
+                    <li>Community building</li>
+                    <li>High efficiency</li>
+                </ul>
+                
+                <h2>Best Social Media Marketing Tips and Guides for Beginners</h2>
+                
+                <p>Social media marketing is one of the easiest and most efficient forms of marketing today, all thanks to the internet. Marketing on social media is for everybody. With these beginners' tips, you can enjoy its benefits in your business and brand.</p>
+                
+                <h2>1. Identify and Understand Your Audience</h2>
+                
+                <p>You need to ask questions like, "who is my audience?" Understanding who your product or business is for will be the foundation of your social media marketing. Once you understand the demography, either Gen Z, millennial or older, activities they enjoy, and everything about them, then your marketing strategy will be efficient.</p>
+                
+                <h2>2. Highlight Ways to Reach Your Audience and Choose the Best Social Media Platform</h2>
+                
+                <p>Understanding your audience will give you a great start in identifying the best social platform to reach them with. If they are young, love looking good and post how beautiful they are, then the obvious social media platforms to market your beauty products are Instagram or TikTok. Identifying different ways, and choosing the best that will reach your audience is a great strategy.</p>
+                
+                <h2>3. Have Clear Goals</h2>
+                
+                <p>You can get overwhelmed when you have different goals. Some marketing goals include engagements, awareness, high traffic, community building, etc. Setting aside specific marketing goals and following them means you won't get distracted.</p>
+                
+                <h2>4. Choose Between Organic or Paid Growth</h2>
+                
+                <p>This is another important marketing strategy. Organic growth is the best for small businesses and also cheap, but your reach might be limited. Conversely, you can make use of paid ad campaigns or social media influencers on popular social media platforms. This growth is fast, but more expensive. So, depending on your business or brand, you might desire organic growth or choose to pay for ads to reach high audiences faster.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            document.body.style.overflow = "hidden";
+            
+            // Reset to excerpt view when opening
+            const modal = document.getElementById(modalId);
+            const excerpt = modal.querySelector('.article-excerpt');
+            const full = modal.querySelector('.article-full');
+            const btn = modal.querySelector('.read-all-btn');
+            
+            if (excerpt) excerpt.style.display = 'block';
+            if (full) full.style.display = 'none';
+            if (btn) {
+                btn.style.display = 'block';
+                btn.textContent = 'Read Full Article';
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function toggleArticle(modalId) {
+            const modal = document.getElementById(modalId);
+            const excerpt = modal.querySelector('.article-excerpt');
+            const full = modal.querySelector('.article-full');
+            const btn = modal.querySelector('.read-all-btn');
+            
+            if (full.style.display === 'none') {
+                // Show full article
+                excerpt.style.display = 'none';
+                full.style.display = 'block';
+                btn.textContent = 'Show Less';
+                btn.style.display = 'block';
+            } else {
+                // Show excerpt
+                excerpt.style.display = 'block';
+                full.style.display = 'none';
+                btn.textContent = 'Read Full Article';
+                modal.querySelector('.modal-content').scrollTop = 0;
+            }
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    modals[i].style.display = "none";
+                    document.body.style.overflow = "auto";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
