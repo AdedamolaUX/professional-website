@@ -34,14 +34,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:20px 48px;display:fle
 
 /* ── HERO ── */
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
-.hero-left{padding:140px 64px 80px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
+.hero-left{padding:140px 64px 80px;display:flex;flex-direction:column;justify-content:flex-start;position:relative;z-index:2;padding-top:120px}
 .hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:12px}
 .hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold)}
 h1{font-family:var(--serif);font-size:clamp(52px,5.5vw,82px);line-height:1.0;font-weight:900;letter-spacing:-2px;margin-bottom:8px}
 h1 em{font-style:italic;color:var(--gold)}
 .hero-subtitle{font-family:var(--serif);font-size:clamp(18px,2vw,26px);font-weight:400;font-style:italic;color:var(--mid);margin-bottom:32px;line-height:1.4}
 .hero-desc{font-size:15px;line-height:1.8;color:var(--mid);max-width:420px;margin-bottom:48px}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:0}
 .btn-primary{background:var(--ink);color:var(--paper);padding:14px 28px;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.2s}
 .btn-primary:hover{background:var(--gold)}
 .btn-outline{border:1.5px solid var(--ink);color:var(--ink);padding:14px 28px;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.2s}
@@ -58,7 +58,7 @@ h1 em{font-style:italic;color:var(--gold)}
 .card-body{font-size:11px;line-height:1.6;color:var(--mid);font-family:var(--mono)}
 .hero-card:nth-child(3) .card-body{color:var(--light)}
 .hero-card:nth-child(3) .card-label{color:var(--gold)}
-.hero-stats{position:absolute;bottom:80px;left:64px;display:flex;gap:40px}
+.hero-stats{display:flex;gap:40px;margin-top:40px}
 .stat-num{font-family:var(--serif);font-size:36px;font-weight:900;line-height:1;color:var(--ink)}
 .stat-label{font-size:11px;color:var(--mid);margin-top:4px;letter-spacing:0.5px}
 
@@ -190,11 +190,11 @@ footer{background:var(--ink);color:var(--paper);padding:40px 48px;display:flex;a
 
 /* ── SCREENSHOT CARDS ── */
 .work-screenshot-wrap{width:100%;aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.08);position:relative}
-.work-screenshot{width:100%;height:auto;min-height:100%;display:block;object-fit:cover;object-position:top;transform:scale(1);transform-origin:center top;transition:none}
-.work-screenshot-wrap.zooming .work-screenshot{animation:imgZoom 6s ease-in-out infinite alternate;transform-origin:center top}
-@keyframes imgZoom{
-  0%,10%{transform:scale(1) translateY(0%)}
-  90%,100%{transform:scale(1.35) translateY(-8%)}
+.work-screenshot{width:100%;height:auto;display:block;object-fit:cover;object-position:top;transform:translateY(0)}
+.work-screenshot-wrap.panning .work-screenshot{animation:imgPan 7s ease-in-out infinite alternate}
+@keyframes imgPan{
+  0%,15%{transform:translateY(0%)}
+  85%,100%{transform:translateY(-30%)}
 }
 .work-card-img{padding:0;overflow:hidden}
 .work-card-img .work-content{padding:28px 32px 32px}
@@ -759,20 +759,20 @@ const obs = new IntersectionObserver(entries => {
 document.querySelectorAll('.animate').forEach(el=>obs.observe(el));
 
 // Auto-pan screenshots when they scroll into view
-const zoomObs = new IntersectionObserver(entries => {
+const panObs = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     const wrap = entry.target;
     if(entry.isIntersecting) {
-      wrap.classList.remove('zooming');
+      wrap.classList.remove('panning');
       void wrap.offsetWidth;
-      wrap.classList.add('zooming');
+      wrap.classList.add('panning');
     } else {
-      wrap.classList.remove('zooming');
+      wrap.classList.remove('panning');
     }
   });
 },{threshold:0.3});
 
-document.querySelectorAll('.work-screenshot-wrap').forEach(wrap => zoomObs.observe(wrap));
+document.querySelectorAll('.work-screenshot-wrap').forEach(wrap => panObs.observe(wrap));
 </script>
 
 </body>
